@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Header from './components/Header.vue'
-import Main from './components/Main.vue'
+import Header from './components/Header.vue';
+import Main from './components/Main.vue';
 
 export default {
   name: 'App',
@@ -21,5 +21,9 @@ export default {
 <style lang="scss">
 @import "./styles/general.scss";
 
+.container{
+  width: 800px;
+  margin: 0 auto;
+}
 
 </style>
