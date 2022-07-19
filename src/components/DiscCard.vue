@@ -1,55 +1,53 @@
 <template>
-  <div class="containerCards">
         <div class="card_disc">
             <div class="box_image">
-                <img src="../assets/logo.png" alt="" />
+                <img :src="discElement.poster" 
+                :alt="`Poster ${discElement.title}-${discElement.author}-${discElement.year}`"/>
             </div>
 
             <div class="box_info">
-                <h4>Titolo</h4>
-                <h6>Autore</h6>
-                <h6>Anno</h6>
+                <h4> {{ discElement.title }} </h4>
+                <h6> {{ discElement.author }} </h6>
+                <h6> {{ discElement.year }} </h6>
             </div>
         </div>
-  </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props: ["discElement"],
+};
 </script>
 
 <style lang="scss" scoped>
-.containerCards {
-  display: flex;
-  flex-wrap: wrap;
-}
 
 .card_disc {
   background-color: #2e3a46;
   padding: 15px;
   margin: 10px;
-  width: calc(100% / 6 - 20px);
+  width: calc(100% / 5 - 20px);
   text-align: center;
 }
 
 .box_image {
   width: 100%;
-  height: 7rem;
+  height: 8rem;
 
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 }
 
 .box_info h4 {
+    font-size: 16px;
   margin: 10px 0;
   text-transform: uppercase;
 }
 
 .box_info h6 {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 300;
   color: #686b6f;
 }

@@ -1,21 +1,59 @@
 <template>
   <div class="container msCardsBox">
-    <h1>Lista dei dischi</h1>
-    <DiscCard />
+        <div class="containerCards">
+            <DiscCard
+                v-for="(element, index) in discsList"
+                :key="index"
+                :discElement="element"
+            />
+        </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import DiscCard from "./DiscCard.vue";
 
 export default {
   components: {
     DiscCard,
   },
+
+  data: function () {
+    return {
+      discsList: [],
+    };
+  },
+
+  methods: {
+    getDiscs() {
+      //recupero i dati per la lista dei dischi
+      //console.log('Recupero i dati')
+      axios
+        .get("https://flynn.boolean.careers/exercises/api/array/music")
+        .then((result) => {
+          // console.log(result.data.response)
+          this.discsList = result.data.response;
+          console.log(this.discsList);
+        })
+        .catch((error) => {
+          console.warn(error);
+        });
+    },
+  },
+
+  created() {
+    this.getDiscs();
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.containerCards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .msCardsBox {
   color: white;
 }
