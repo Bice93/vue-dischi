@@ -22,7 +22,7 @@ export default {
 @import "./styles/general.scss";
 
 .container{
-  width: 800px;
+  width: 1000px;
   margin: 0 auto;
 }
 

@@ -6,18 +6,17 @@
 </template>
 
 <script>
-import DiscCard from './DiscCard.vue';
+import DiscCard from "./DiscCard.vue";
 
 export default {
-    components:{
-        DiscCard,
-    }
-
-}
+  components: {
+    DiscCard,
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.msCardsBox{
-    color: white;
+.msCardsBox {
+  color: white;
 }
 </style>
