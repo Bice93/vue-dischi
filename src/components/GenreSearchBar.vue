@@ -1,20 +1,25 @@
 <template>
   <div>
      <label> Scegli il genere: </label>
-      <select>
-        <option value="0">Rock</option>
-        <option value="1" @click="log('cliccato')">Pop</option>
+      <select v-model="genreValue">
+        <option v-for="genre in GenreElement" :value="genre"> {{ genre }}</option>
+        <!-- <option value="1">Pop</option>
         <option value="2">Jazz</option>
-        <option value="3">Metal</option>
+        <option value="3">Metal</option> -->
       </select>
   </div>
 </template>
 
 <script>
 export default {
-    //  data: function(){
+    props: ['GenreElement'],
+
+     data: function(){
+        return{
+            genreValue: '',
+        }
         
-    //  },
+    },
 
     methods: {
         log(arg){

@@ -1,12 +1,12 @@
 <template>
   <div class="container msCardsBox">
     <div class="boxSelect_gender">
-      <GenderSearchBar @search="searchInGender"/>
+      <GenreSearchBar :GenreElement="filterGenreList"/>
     </div>
 
     <div class="containerCards">
       <DiscCard
-        v-for="(element, index) in filteredGenderList"
+        v-for="(element, index) in discsList"
         :key="index"
         :discElement="element"
       />
@@ -17,18 +17,18 @@
 <script>
 import axios from "axios";
 import DiscCard from "./DiscCard.vue";
-import GenderSearchBar from "./GenderSearchBar.vue";
+import GenreSearchBar from "./GenreSearchBar.vue";
 
 export default {
   components: {
     DiscCard,
-    GenderSearchBar,
+    GenreSearchBar,
   },
 
   data: function () {
     return {
       discsList: [],
-      filteredGenderList : [],
+      filterGenreList : [],
     };
   },
 
@@ -41,23 +41,26 @@ export default {
         .then((result) => {
           //console.log(result.data.response)
           this.discsList = result.data.response;
-          this.filteredGenderList = this.discsList;
+
+          //RECUPERO TUTTI I GENERI
+          this.discsList.forEach(element => {
+            if(!this.filterGenreList.includes(element.genre)) {
+              this.filterGenreList.push(element.genre);
+            }
+          });
+          console.log(this.filterGenreList);
           console.log(this.discsList);
+          
         })
         .catch((error) => {
           console.warn(error);
         });
     },
 
-    searchInGender (value){
-      this.filteredGenderList = [...this.discsList].filter( (element) => element.genre.includes(value) );
-      console.log(this.filteredGenderList('pop'));
-    }
   },
 
   created() {
     this.getDiscs();
-    this.searchInGender();
   },
 };
 </script>
