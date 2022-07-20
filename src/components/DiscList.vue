@@ -1,12 +1,12 @@
 <template>
   <div class="container msCardsBox">
     <div class="boxSelect_gender">
-      <GenderSearchBar/>
+      <GenderSearchBar @search="searchInGender"/>
     </div>
 
     <div class="containerCards">
       <DiscCard
-        v-for="(element, index) in discsList"
+        v-for="(element, index) in filteredGenderList"
         :key="index"
         :discElement="element"
       />
@@ -28,6 +28,7 @@ export default {
   data: function () {
     return {
       discsList: [],
+      filteredGenderList : [],
     };
   },
 
@@ -40,16 +41,23 @@ export default {
         .then((result) => {
           //console.log(result.data.response)
           this.discsList = result.data.response;
+          this.filteredGenderList = this.discsList;
           console.log(this.discsList);
         })
         .catch((error) => {
           console.warn(error);
         });
     },
+
+    searchInGender (value){
+      this.filteredGenderList = [...this.discsList].filter( (element) => element.genre.includes(value) );
+      console.log(this.filteredGenderList('pop'));
+    }
   },
 
   created() {
     this.getDiscs();
+    this.searchInGender();
   },
 };
 </script>
